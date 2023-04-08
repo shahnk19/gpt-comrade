@@ -16,24 +16,21 @@ var shellName = "bash"
 var fixCmd = &cobra.Command{
 	Use:   "fix",
 	Short: "Find a fix for the previous command line error.",
-	Long: `If you run into an error on your command line, use this command to
-find a fix for the error from ChatGPT.`,
+	Long: `If you run into an error on your command line, use this command to 
+				find a fix for the error from ChatGPT.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		apiKey := os.Getenv("OPENAI_API_KEY")
 		if (apiKey == "") {
-			fmt.Println("ChatGPT API Key need to be set, get from https://platform.openai.com/account/api-keys.\nSet by running `export OPENAI_API_KEY=<your key>`")
+			fmt.Println(`ChatGPT API Key need to be set, get from
+			https://platform.openai.com/account/api-keys.\nSet by 
+			running 'export OPENAI_API_KEY=<your key>'`)
 			return
 		}
 
-		fmt.Printf("gpt-comrade finding a fix for: %v\r\n", args)
+		lastCommand, _ := cmd.Flags().GetString("last-command")
 
-		if len(args) <= 0 {
-			fmt.Println("All is well!")
-			return
-		}
+		fmt.Printf("gpt-comrade finding a fix for: %v\r\n", lastCommand)
 
-		lastCommand := args[0]
-		
 		if lastCommand == "" {
 			fmt.Println("All is well!")
 			return
@@ -44,16 +41,10 @@ find a fix for the error from ChatGPT.`,
 			fmt.Println("All is well!")
 			return
 		}
-		pkg.FetchFix(lastCommand, err, stdErr)
-		// } else {			
-		// 	if stdOut == "" {
-		// 		fmt.Println("All is well!")
-		// 		return
-		// 	}
-		// 	pkg.FetchFix(lastCommand, err, stdOut)
-		// }
 
-		// fmt.Println("Fake GPT response!")
+		cheeky, _ := cmd.Flags().GetBool("cheeky")
+
+		pkg.FetchFix(lastCommand, err, stdErr, cheeky)
 	},
 }
 
@@ -62,6 +53,8 @@ func init() {
 	rootCmd.AddCommand(fixCmd)
 
 	fixCmd.Flags().BoolP("cheeky", "c", false, "Add some humor to the fix.")
+	fixCmd.Flags().StringP("last-command", "k", "", "The last command to fix.")
+	rootCmd.MarkFlagRequired("last-command")
 }
 
 func FindShell() {

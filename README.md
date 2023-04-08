@@ -38,7 +38,7 @@ Install `GPT Comrade`:
 Then add to your `.bashrc` or `.zshrc`:
 
 ```bash
-  alias comrade='gpt-comrade fix "$(fc -ln -1)")'
+  alias comrade='gpt-comrade "$@" -k="$(fc -ln -1)"'
 ```
 
 Get your OPENAI API key from https://platform.openai.com/account/api-keys and add it to your terminal ENV:
@@ -52,7 +52,7 @@ Now you can run `comrade`:
 ```
   ❯ asdf
   zsh: command not found: asdf
-  ❯ comrade
+  ❯ comrade fix
   Current Shell: /bin/zsh
 
   gpt-comrade finding a fix for: [asdf]
@@ -85,7 +85,7 @@ More example:
 
   npm ERR! A complete log of this run can be found in:
   npm ERR!     /Users/shah/.npm/_logs/2023-04-07T09_29_43_699Z-debug-0.log
-  ❯ comrade
+  ❯ comrade fix
   Current Shell: /bin/zsh
 
   gpt-comrade finding a fix for: [npm install]]
