@@ -14,11 +14,14 @@ func FetchFix(command string, terminalStatus error, errorMessage string, cheeky 
 	client := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
 
 	req := openai.ChatCompletionRequest{
-		Model: openai.GPT3Dot5Turbo,
+		Model:     openai.GPT3Dot5Turbo,
+		MaxTokens: 250,
 		Messages: []openai.ChatCompletionMessage{
 			{
-				Role:    openai.ChatMessageRoleSystem,
-				Content: "You are a helpful assistant. You can find solution for any command line errors given to you. You would give a step by step solution complete with code fixes or commands.",
+				Role: openai.ChatMessageRoleSystem,
+				Content: `You are a helpful assistant. You can find solution for any
+								 command line errors given to you. You would give a step by
+								 step solution complete with code fixes or commands.`,
 			},
 			{
 				Role: openai.ChatMessageRoleUser,
