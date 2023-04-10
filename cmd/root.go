@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 )
+
 var (
 	rootCmd = &cobra.Command{
 		Use:   "gpt-comrade",
@@ -28,7 +29,7 @@ var (
 		system's firmware. Restart your computer: As with many technical issues, a simple
 		restart may resolve the issue.`,
 
-		Run: func(cmd *cobra.Command, args []string) { 
+		Run: func(cmd *cobra.Command, args []string) {
 			apiKey, _ := cmd.Flags().GetString("api-key")
 
 			os.Setenv("OPENAI_API_KEY", apiKey)

@@ -7,10 +7,10 @@ import (
 	"io"
 	"os"
 
-	 openai "github.com/sashabaranov/go-openai"
+	openai "github.com/sashabaranov/go-openai"
 )
 
-func FetchFix(command string, terminalStatus error, errorMessage string, cheeky bool) {	
+func FetchFix(command string, terminalStatus error, errorMessage string, cheeky bool) {
 	client := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
 
 	req := openai.ChatCompletionRequest{
@@ -21,12 +21,12 @@ func FetchFix(command string, terminalStatus error, errorMessage string, cheeky 
 				Content: "You are a helpful assistant. You can find solution for any command line errors given to you. You would give a step by step solution complete with code fixes or commands.",
 			},
 			{
-				Role:    openai.ChatMessageRoleUser,
+				Role: openai.ChatMessageRoleUser,
 				Content: "I tried to run this command in my terminal: '" + command +
-								 "' It is giving this error: " + errorMessage + "." +
-								 terminalStatusPrompt(terminalStatus) +
-								 "Can you help to find the problem and what can I do to fix it?" +
-								 cheekyPrompt(cheeky),
+					"' It is giving this error: " + errorMessage + "." +
+					terminalStatusPrompt(terminalStatus) +
+					"Can you help to find the problem and what can I do to fix it?" +
+					cheekyPrompt(cheeky),
 			},
 		},
 		Stream: true,
