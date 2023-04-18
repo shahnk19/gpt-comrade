@@ -58,8 +58,7 @@ command line, get immidiate help and fix from ChatGPT. For example:
   3. Update your project's version of `gatsby` to be compatible with version `^5.0.0-next` of `gatsby-plugin-twitter`. You can do this by updating your `package.json` file to require a version of `gatsby` that is compatible with both your project and `gatsby-plugin-twitter
   Stream finished
 ```
-
-More examples:
+Another example:
 
 ```
   > ERROR: Keyboard not present, press any key.
@@ -78,6 +77,8 @@ More examples:
   system's firmware. Restart your computer: As with many technical issues, a simple
   restart may resolve the issue.
 ```
+
+More examples can be found in [COMMAND_FIX_EXAMPLES](https://github.com/shahnk19/gpt-comrade/blob/master/COMMAND_FIX_EXAMPLES)
 
 ## Installation
 
